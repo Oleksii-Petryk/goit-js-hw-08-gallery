@@ -69,7 +69,6 @@ const galleryRef = document.querySelector('.js-gallery');
 const lightBoxRef = document.querySelector('.js-lightbox');
 const lightBoxOverlayRef = document.querySelector('.lightbox__overlay');
 const lightBoxImgRef = document.querySelector('.lightbox__image');
-
 const lightBoxBtnCloseRef = document.querySelector('[data-action="close-lightbox"]');
 
 const GalleryCollection = makeGalleryCollectionHtmlItem(galleryItems);
@@ -113,6 +112,7 @@ function onGalleryImgClick(e) {
   lightBoxBtnCloseRef.addEventListener('click', onLightBoxBtnCloseClick);
   window.addEventListener('keydown', onEscKeyPress);
   lightBoxOverlayRef.addEventListener('click', onOverlayClick);
+  window.addEventListener('keydown', onSliderClick);
 };
 
 
@@ -122,6 +122,7 @@ function onLightBoxBtnCloseClick(e) {
   lightBoxRef.classList.remove('is-open');
   window.removeEventListener('keydown', onEscKeyPress);
   lightBoxOverlayRef.removeEventListener('click', onOverlayClick);
+   window.removeEventListener('keydown', onSliderClick);
 };
 
 
@@ -140,3 +141,30 @@ function onOverlayClick(e) {
   };
 };
 
+function onSliderClick(e) {
+  const ArrowRight = 'ArrowRight';
+  const ArrowLeft = 'ArrowLeft';
+  
+  if (e.code === ArrowRight) {
+    imgSrcChange();
+  };
+    if (e.code === ArrowLeft) {
+      
+    };
+  };
+
+// const currentImgSrc = galleryItems.map(elem => elem.original);
+// console.log(currentImgSrc);
+// const currentImgAlt = galleryItems.map(elem => elem.description);
+
+function imgSrcChangePlus() {
+  galleryItems
+    .map(elem => elem.original)
+    .forEach((elem, index) => {
+      if (lightBoxImgRef.src === elem) {
+        lightBoxImgRef.src = (galleryItems.map(elem => elem.original))[index + 1];
+        console.log(lightBoxImgRef.src);
+        lightBoxImgRef.alt = (galleryItems.map(elem => elem.description))[index + 1];
+      };
+    });
+};
