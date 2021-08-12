@@ -66,7 +66,14 @@ const galleryItems = [
 
 
 const galleryRef = document.querySelector('.js-gallery');
+const lightBoxRef = document.querySelector('.js-lightbox');
+const lightBoxOverlayRef = document.querySelector('.lightbox__overlay');
+const lightBoxImgRef = document.querySelector('.lightbox__image');
+
+const lightBoxBtnCloseRef = document.querySelector('[data-action="close-lightbox"]');
+
 const GalleryCollection = makeGalleryCollectionHtmlItem(galleryItems);
+
 galleryRef.insertAdjacentHTML('beforeend', GalleryCollection);
 
 function makeGalleryCollectionHtmlItem(galleryItems) {
@@ -90,26 +97,46 @@ function makeGalleryCollectionHtmlItem(galleryItems) {
     .join('');
 };
 
+
 galleryRef.addEventListener('click', onGalleryImgClick);
 
-const lightBoxRef = document.querySelector('.js-lightbox');
-const lightBoxImgRef = document.querySelector('.lightbox__image');
 
 function onGalleryImgClick(e) {
   e.preventDefault();
   if (!e.target.classList.contains('gallery__image')) {
-  return
+    return
   };
 
   lightBoxRef.classList.add('is-open');
   lightBoxImgRef.alt = e.target.alt;
   lightBoxImgRef.src = e.target.dataset.source;
+  lightBoxBtnCloseRef.addEventListener('click', onLightBoxBtnCloseClick);
+  window.addEventListener('keydown', onEscKeyPress);
+  lightBoxOverlayRef.addEventListener('click', onOverlayClick);
 };
 
-const lightBoxBtnCloseRef = document.querySelector('.lightbox__button');
-
-lightBoxBtnCloseRef.addEventListener('click', onLightBoxBtnCloseClick);
 
 function onLightBoxBtnCloseClick(e) {
+  lightBoxImgRef.src = '';
+  lightBoxImgRef.alt = '';
   lightBoxRef.classList.remove('is-open');
-}
+  window.removeEventListener('keydown', onEscKeyPress);
+  lightBoxOverlayRef.removeEventListener('click', onOverlayClick);
+};
+
+
+function onEscKeyPress(e) {
+  const EscCode = 'Escape';
+  const isEscCode = e.code === EscCode;
+  if (isEscCode) {
+    onLightBoxBtnCloseClick(e);
+  };
+};
+
+
+function onOverlayClick(e) {
+  if (e.currentTarget === e.target) {
+    onLightBoxBtnCloseClick(e);
+  };
+};
+
