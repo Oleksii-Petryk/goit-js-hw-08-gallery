@@ -122,7 +122,7 @@ function onLightBoxBtnCloseClick(e) {
   lightBoxRef.classList.remove('is-open');
   window.removeEventListener('keydown', onEscKeyPress);
   lightBoxOverlayRef.removeEventListener('click', onOverlayClick);
-   window.removeEventListener('keydown', onSliderClick);
+  window.removeEventListener('keydown', onSliderClick);
 };
 
 
@@ -158,13 +158,16 @@ function onSliderClick(e) {
 // const currentImgAlt = galleryItems.map(elem => elem.description);
 
 function imgSrcChangePlus() {
-  galleryItems
-    .map(elem => elem.original)
-    .forEach((elem, index) => {
-      if (lightBoxImgRef.src = elem) {
-        lightBoxImgRef.src = galleryItems.map(elem => elem.original)[index + 1];
-        console.log(lightBoxImgRef.src);
-        lightBoxImgRef.alt = (galleryItems.map(elem => elem.description))[index + 1];
+  const currentImg = galleryItems.map(elem => elem.original);
+  
+    currentImg.forEach((elem, index) => {
+      if (lightBoxImgRef.src === elem && index < currentImg.length) {
+        lightBoxImgRef.src = currentImg[index + 1];
+
+        lightBoxImgRef.alt = currentImg[index + 1];
       };
     });
 };
+
+
+
