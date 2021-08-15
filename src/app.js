@@ -146,7 +146,7 @@ function onSliderClick(e) {
   const ArrowLeft = 'ArrowLeft';
   
   if (e.code === ArrowRight) {
-    imgSrcChange();
+    imgSrcChangePlus();
   };
     if (e.code === ArrowLeft) {
       
@@ -161,8 +161,8 @@ function imgSrcChangePlus() {
   galleryItems
     .map(elem => elem.original)
     .forEach((elem, index) => {
-      if (lightBoxImgRef.src === elem) {
-        lightBoxImgRef.src = (galleryItems.map(elem => elem.original))[index + 1];
+      if (lightBoxImgRef.src = elem) {
+        lightBoxImgRef.src = galleryItems.map(elem => elem.original)[index + 1];
         console.log(lightBoxImgRef.src);
         lightBoxImgRef.alt = (galleryItems.map(elem => elem.description))[index + 1];
       };
