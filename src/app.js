@@ -141,6 +141,7 @@ function onOverlayClick(e) {
   };
 };
 
+
 function onSliderClick(e) {
   const ArrowRight = 'ArrowRight';
   const ArrowLeft = 'ArrowLeft';
@@ -154,39 +155,36 @@ function onSliderClick(e) {
   };
 
 
-
 function imgSrcChangePlus() {
-  const currentImg = galleryItems.map(elem => elem.original);
-      for (let i = 0; i < currentImg.length; i += 1) {
-      if (lightBoxImgRef.src === currentImg[i] && i < currentImg.length) {
+  const ImgArraySrc = galleryItems.map(elem => elem.original);
+  const ImgArrayDesc = galleryItems.map(elem => elem.description);
+      for (let i = 0; i < ImgArraySrc.length; i += 1) {
+      if (lightBoxImgRef.src === ImgArraySrc[i] && i < ImgArraySrc.length) {
         i += 1;
-
-        lightBoxImgRef.src = currentImg[i];
-        lightBoxImgRef.alt = currentImg[i];
+        lightBoxImgRef.src = ImgArraySrc[i];
+        lightBoxImgRef.alt = ImgArrayDesc[i];
       };
-      if (i === currentImg.length) {
-
-        lightBoxImgRef.src = currentImg[0];
-        lightBoxImgRef.alt = currentImg[0];
+      if (i === ImgArraySrc.length) {
+        lightBoxImgRef.src = ImgArraySrc[0];
+        lightBoxImgRef.alt = ImgArrayDesc[0];
       };
     };
 };
 
+
 function imgSrcChangeMinus() {
-  const currentImg = galleryItems.map(elem => elem.original);
-      for (let i = 0; i < currentImg.length; i += 1) {
-      if (lightBoxImgRef.src === currentImg[i] && i < currentImg.length) {
-        i -= 1;
-
-        lightBoxImgRef.src = currentImg[i];
-        lightBoxImgRef.alt = currentImg[i];
-         console.log(currentImg[currentImg.length]);
+  const ImgArraySrc = galleryItems.map(elem => elem.original).reverse();
+  const ImgArrayDesc = galleryItems.map(elem => elem.description).reverse();
+      for (let i = 0; i < ImgArraySrc.length; i += 1) {
+      if (lightBoxImgRef.src === ImgArraySrc[i] && i < ImgArraySrc.length) {
+        i += 1;
+        lightBoxImgRef.src = ImgArraySrc[i];
+        lightBoxImgRef.alt = ImgArrayDesc[i];
+        console.log(lightBoxImgRef.alt);
       };
-      if (lightBoxImgRef.src === currentImg[0]) {
-
-        lightBoxImgRef.src = currentImg[(currentImg.length)];
-        console.log(currentImg[(currentImg.length)]);
-        lightBoxImgRef.alt = currentImg[(currentImg.length)];
+      if (i === ImgArraySrc.length) {
+        lightBoxImgRef.src = ImgArraySrc[0];
+        lightBoxImgRef.alt = ImgArrayDesc[0];
       };
     };
 };
