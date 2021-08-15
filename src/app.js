@@ -149,25 +149,46 @@ function onSliderClick(e) {
     imgSrcChangePlus();
   };
     if (e.code === ArrowLeft) {
-      
+    imgSrcChangeMinus()
     };
   };
 
-// const currentImgSrc = galleryItems.map(elem => elem.original);
-// console.log(currentImgSrc);
-// const currentImgAlt = galleryItems.map(elem => elem.description);
+
 
 function imgSrcChangePlus() {
   const currentImg = galleryItems.map(elem => elem.original);
-  
-    currentImg.forEach((elem, index) => {
-      if (lightBoxImgRef.src === elem && index < currentImg.length) {
-        lightBoxImgRef.src = currentImg[index + 1];
+      for (let i = 0; i < currentImg.length; i += 1) {
+      if (lightBoxImgRef.src === currentImg[i] && i < currentImg.length) {
+        i += 1;
 
-        lightBoxImgRef.alt = currentImg[index + 1];
+        lightBoxImgRef.src = currentImg[i];
+        lightBoxImgRef.alt = currentImg[i];
       };
-    });
+      if (i === currentImg.length) {
+
+        lightBoxImgRef.src = currentImg[0];
+        lightBoxImgRef.alt = currentImg[0];
+      };
+    };
 };
 
+function imgSrcChangeMinus() {
+  const currentImg = galleryItems.map(elem => elem.original);
+      for (let i = 0; i < currentImg.length; i += 1) {
+      if (lightBoxImgRef.src === currentImg[i] && i < currentImg.length) {
+        i -= 1;
+
+        lightBoxImgRef.src = currentImg[i];
+        lightBoxImgRef.alt = currentImg[i];
+         console.log(currentImg[currentImg.length]);
+      };
+      if (lightBoxImgRef.src === currentImg[0]) {
+
+        lightBoxImgRef.src = currentImg[(currentImg.length)];
+        console.log(currentImg[(currentImg.length)]);
+        lightBoxImgRef.alt = currentImg[(currentImg.length)];
+      };
+    };
+};
 
 
